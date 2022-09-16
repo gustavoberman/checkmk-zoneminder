@@ -21,6 +21,6 @@ I'm sure this is not the best way to do it.
 ## Usage:
 Copy plugin/zoneminder_monitors.py into a host's plugin directory.
 
-Copy agent/zoneminder_monitors.py into the checkmk agent_based directory.
+Copy check/zoneminder_monitors.py into the checkmk check plugins directory.
 
 Remember to modify plugin/zoneminder_monitors.py with your Zoneminder url/user/pass
