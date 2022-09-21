@@ -3,12 +3,20 @@ from .agent_based_api.v1 import *
 #This file goes into your Checkmk site 'check plugins' directory (local/lib/check_mk/base/plugins/agent_based)
 
 def discover_zoneminder_monitors(section):
-    for monID, _name, _status, _cfps, _afps, _cb in section:
+    for monID, name, status, cfps, afps, cb in section:
         yield Service(item=monID)
 
 def check_zoneminder_monitors(item, section):
     for monID, name, status, cfps, afps, cb in section:
         if monID == item:
+            
+            cfps = float(cfps)
+            afps = float(afps)
+            cb = float(cb)
+            yield Metric("CaptureFPS", cfps)
+            yield Metric("AnalysisFPS", afps)
+            yield Metric("CaptureBandwidth", cb)
+            
             if status != "Connected":
                 s = State.CRIT
             else:
